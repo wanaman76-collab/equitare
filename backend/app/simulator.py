@@ -136,17 +136,17 @@ def _build_reading(fl: float, fr: float, rl: float, rr: float) -> dict:
 
     # Capture whether a previous reading exists BEFORE appending the current total.
     # This determines whether spike detection should be applied.
-    has_prev = len(_history) > 0
+    has_previous_reading = len(_history) > 0
 
     _history.append(totals["total_kg"])
 
     is_stable, stability_reason = check_stability(
         fl, fr, rl, rr,
         history=_history,
-        prev_fl=_prev["FL"] if has_prev else None,
-        prev_fr=_prev["FR"] if has_prev else None,
-        prev_rl=_prev["RL"] if has_prev else None,
-        prev_rr=_prev["RR"] if has_prev else None,
+        prev_fl=_prev["FL"] if has_previous_reading else None,
+        prev_fr=_prev["FR"] if has_previous_reading else None,
+        prev_rl=_prev["RL"] if has_previous_reading else None,
+        prev_rr=_prev["RR"] if has_previous_reading else None,
     )
 
     _prev = {"FL": fl, "FR": fr, "RL": rl, "RR": rr}

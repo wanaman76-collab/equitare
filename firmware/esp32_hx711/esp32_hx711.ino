@@ -80,25 +80,21 @@ unsigned long last_read_ms = 0;
  *   scale_fl_obj.begin(FL_DOUT, FL_SCK);
  *   ...
  *
- * Then replace read_raw_*() calls below with scale_fl_obj.read_average(3).
+ * Then replace the read_raw() call below with scale_<pad>_obj.read_average(3).
  */
 
-long read_raw_fl() {
-  // STUB: replace with actual HX711 read for FL
-  return tare_fl + (long)(random(-200, 200));
+/**
+ * Stub: return a simulated raw reading centred on the given tare offset.
+ * Replace this with a real HX711 library read for the specific pad.
+ */
+long read_raw_stub(long tare_offset) {
+  return tare_offset + (long)(random(-200, 200));
 }
 
-long read_raw_fr() {
-  return tare_fr + (long)(random(-200, 200));
-}
-
-long read_raw_rl() {
-  return tare_rl + (long)(random(-200, 200));
-}
-
-long read_raw_rr() {
-  return tare_rr + (long)(random(-200, 200));
-}
+long read_raw_fl() { return read_raw_stub(tare_fl); }
+long read_raw_fr() { return read_raw_stub(tare_fr); }
+long read_raw_rl() { return read_raw_stub(tare_rl); }
+long read_raw_rr() { return read_raw_stub(tare_rr); }
 
 // ---------------------------------------------------------------------------
 // Conversion helper
